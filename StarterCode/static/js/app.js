@@ -1,5 +1,5 @@
 var optionSelect= d3.select("#selDataset");
-//var optionValue=optionSelect.property("value");
+
 
 
 
@@ -63,7 +63,7 @@ var optionSelect= d3.select("#selDataset");
             marker:{
                 size:sampData,
                 color:otuID,
-               // colorscale: [[0, 'rgb(0, 0, 0)'], [1, 'rgb(0, 255, 0)']],
+              
                
             },
             text:otuLabel,
