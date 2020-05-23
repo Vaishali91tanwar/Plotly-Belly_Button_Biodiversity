@@ -4,11 +4,11 @@ function initGuage(){
     d3.json("samples.json").then(function(data){
     console.log(data);
     washingFrequency= data.metadata[0].wfreq;
-    console.log(washingFrequency);
-    });
+    
+    
 
     //Plotting the gauge
-
+    console.log(washingFrequency);
     var trace3={
         domain: { x: [0, 1], y: [0, 1] },
         value: washingFrequency,
@@ -42,6 +42,22 @@ function initGuage(){
     var data3=[trace3];
 
     Plotly.newPlot("gauge",data3,layout);
+});
 };
-//d3.select("#gauge").append("h4").append("strong").text("Belly Button washing Frequency");
+
+function optionChanged2(optionValue){
+    d3.json("samples.json").then(function(data){
+        var washfreq;
+        for(var i=0;i<153;i++){
+            if(data.metadata[i].id==optionValue){
+               washfreq=data.metadata[i].wfreq;
+               //console.log(data.metadat)
+            };
+            console.log(washfreq);
+        };
+        Plotly.restyle("gauge","value",[washfreq]);
+    });
+};
+
+
 initGuage();
