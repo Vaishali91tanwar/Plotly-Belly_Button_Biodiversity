@@ -15,3 +15,6 @@ The bar graph has been created using Plotly and displays the top 10 microbial sp
 
 The gauge created using Plolty shows the belly button washing frequency of the selected individual.<br><br>
 <img src="gauge.png">
+
+Plotly has been used to create the bubble chart which gives the different OTU ID with respect to their amount found in the sample. Also, the size and the color of the bubble varies with change in amount present in the sample.
+<img src="bubble_plot.png">
