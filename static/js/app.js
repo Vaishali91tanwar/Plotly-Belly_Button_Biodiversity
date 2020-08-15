@@ -77,6 +77,47 @@ var optionSelect= d3.select("#selDataset");
 
         Plotly.newPlot("bubble",data2,layout);
 
+        //Making the guage
+        washingFrequency= data.metadata[0].wfreq;
+    
+    
+
+        //Plotting the gauge
+        console.log(washingFrequency);
+        var trace3={
+            domain: { x: [0, 1], y: [0, 1] },
+            value: washingFrequency,
+            title: { text: "Scrubs per week" },
+            // labels: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
+            textinfo: 'text',
+            textposition: 'inside',
+            type: "indicator",
+            mode: "gauge+number",
+            gauge: {
+                axis: { range: [null, 9] },
+                steps: [
+                         
+                  { range: [0, 1], color: "#ff1a40"},
+                  { range: [1, 2], color: "#ff3355" },
+                  { range: [2, 3], color: "#ff4d6a" },
+                  { range: [3, 4], color: "#ff6680" },
+                  { range: [4, 5], color: "#ff8095" },
+                  { range: [5, 6], color: "#ff99aa" },
+                  { range: [6, 7], color: "#ffb3bf" },
+                  { range: [7, 8], color: "#ffc0cb" },
+                  { range: [8, 9], color: "#ffccd5" },
+                ] 
+            }
+        };
+    
+        var layout={
+           title:"Belly Button Washing Frequency"
+        }
+    
+        var data3=[trace3];
+    
+        Plotly.newPlot("gauge",data3,layout);
+
 
  })
 };
@@ -114,6 +155,8 @@ function optionChanged(optionValue){
         var otuLabel;
         var otuLabelfiltered;
         var strMeta=[];
+        var washfreq;
+        
         console.log(optionValue);
     
         for(var i=0;i<153;i++){
@@ -125,11 +168,12 @@ function optionChanged(optionValue){
                 sampDatafiltered= sampData.slice(0,10).reverse();
                 otuLabel=data.samples[i].otu_labels;
                 otuLabelfiltered=otuLabel.slice(0,10).reverse();
+                
             };
             if(data.metadata[i].id==optionValue){
                 
                 console.log(Object.keys(data.metadata[i])[0]);
-                
+                washfreq=data.metadata[i].wfreq;
                 //var metaData=d3.select("#sample-metadata");
             
                 for(var j=0;j<Object.keys(data.metadata[i]).length;j++){
@@ -161,6 +205,11 @@ function optionChanged(optionValue){
     Plotly.restyle("bubble","text",[otuLabel]);
     Plotly.restyle("bubble","size",[sampData]);
     Plotly.restyle("bubble","color",[otuID]);
+
+    //Restyle the gauge
+    Plotly.restyle("gauge","value",[washfreq]);
+
+    
 });
 
 };
